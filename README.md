@@ -1,4 +1,4 @@
-# ComposeProject
+# Compose Project
 
 ## Preview
 <div style="display:flex;">
