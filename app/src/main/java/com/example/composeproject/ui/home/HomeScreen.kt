@@ -1,10 +1,9 @@
 package com.example.composeproject.ui.home
 
+
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,36 +15,45 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.rememberImagePainter
-import com.example.composeproject.data.remote.model.CharacterModel
-import com.example.composeproject.domain.CharacterItem
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
+import com.example.composeproject.domain.ProductItem
+import com.example.composeproject.navigation.Screen
+
+/**
+ * Created by OMK on 11/01/23.
+ */
 
 @Composable
-fun HomeScreen() {
-    val homeViewModel = viewModel(modelClass = HomeViewModel::class.java)
-    val characters by homeViewModel.characters.collectAsState()
+fun HomeScreen(navController: NavController) {
+    val homeViewModel: HomeViewModel = hiltViewModel()
+    val products by homeViewModel.characters.collectAsState()
 
     LazyColumn {
 
-        items(characters) { character: CharacterItem ->
-            CharacterCard(character = character)
+        items(products) { character: ProductItem ->
+            productCard(product = character, navController = navController)
         }
     }
 }
 
 @Composable
-fun CharacterCard(character: CharacterItem) {
+fun productCard(navController: NavController, product: ProductItem) {
 
-    val image = rememberImagePainter(data = character.image)
+    val image = rememberAsyncImagePainter(model = product.image)
+    Spacer(modifier = Modifier.height(20.dp))
     Card(
         elevation = 5.dp,
         shape = RoundedCornerShape(5.dp),
         modifier = Modifier
             .padding(top = 5.dp, bottom = 5.dp, start = 5.dp, end = 5.dp)
             .fillMaxSize()
+            .clickable {
+                navController.navigate(route = "${Screen.DetailScreen.route}?category=${product.category} description=${product.description} id=${product.id} image=${product.image} price=${product.price} title=${product.title}")
+            }
+
     ) {
         Column {
             Image(
@@ -57,8 +65,8 @@ fun CharacterCard(character: CharacterItem) {
                     .height(250.dp)
             )
             Column(modifier = Modifier.padding(10.dp)) {
-                Text(text = character.title, fontWeight = FontWeight.Bold)
-                Text(text = character.description, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                Text(text = product.title, fontWeight = FontWeight.Bold)
+                Text(text = product.price.toString(), maxLines = 2)
             }
         }
     }

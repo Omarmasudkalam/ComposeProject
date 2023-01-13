@@ -6,13 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.composeproject.ui.home.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.composeproject.navigation.NavGraph
 import com.example.composeproject.ui.theme.ComposeProjectTheme
 import dagger.hilt.android.AndroidEntryPoint
+
+/**
+ * Created by OMK on 11/01/23.
+ */
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -24,10 +27,15 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                   HomeScreen()
+                    MainScreen()
                 }
             }
         }
     }
+}
+@Composable
+fun MainScreen(){
+    val navController= rememberNavController()
+    NavGraph(navController)
 }
 

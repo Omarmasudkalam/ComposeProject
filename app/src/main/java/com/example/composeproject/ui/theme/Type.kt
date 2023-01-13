@@ -6,6 +6,10 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
+/**
+ * Created by OMK on 11/01/23.
+ */
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     body1 = TextStyle(
