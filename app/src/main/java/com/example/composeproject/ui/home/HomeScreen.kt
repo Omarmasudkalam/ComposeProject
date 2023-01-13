@@ -66,7 +66,7 @@ fun productCard(navController: NavController, product: ProductItem) {
             )
             Column(modifier = Modifier.padding(10.dp)) {
                 Text(text = product.title, fontWeight = FontWeight.Bold)
-                Text(text = product.price.toString(), maxLines = 2)
+                Text(text = "£"+product.price.toString(), maxLines = 2)
             }
         }
     }

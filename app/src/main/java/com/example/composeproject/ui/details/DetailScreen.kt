@@ -1,4 +1,4 @@
-package com.example.composeproject.ui.detail
+package com.example.composeproject.ui.details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -31,7 +31,7 @@ fun DetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.White)
+                    .background(Color.LightGray)
                     .padding(16.dp)
             ) {
                     val imagePainter = rememberAsyncImagePainter(image)
@@ -47,7 +47,7 @@ fun DetailScreen(
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
-                       text = "Product Name: $title",
+                       text = "$title",
                         fontWeight = FontWeight.Bold,
                         fontSize = 18.sp,
                         overflow = TextOverflow.Ellipsis,
@@ -69,7 +69,7 @@ fun DetailScreen(
                     Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = "Price: $price",
+                    text = "Price: ${price}",
                     fontSize = 14.sp,
                     modifier = Modifier.fillMaxWidth(),
                     overflow = TextOverflow.Ellipsis
