@@ -31,7 +31,7 @@ fun DetailScreen(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color.LightGray)
+                    .background(Color.White)
                     .padding(16.dp)
             ) {
                     val imagePainter = rememberAsyncImagePainter(image)
@@ -43,7 +43,7 @@ fun DetailScreen(
                     Image(
                         painter = imagePainter,
                         contentDescription = "",
-                        Modifier.size(300.dp)
+                        Modifier.size(60.dp)
                     )
                     Spacer(modifier = Modifier.height(8.dp))
                     Text(
